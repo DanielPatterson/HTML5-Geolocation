@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+    
+    <title>HTML5 Geolocation</title>
+    
+    <link href="../dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../dist/js/ie10-viewport-bug-workaround.js" rel="stylesheet">
+    
+    <link href="../dist/css/prettify-min.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+
+<body>
+<div class="container">
+	<div class="row">
+    	<div class="col-lg-12">
+            <h1 class="page-header">HTML5 Geolocation</h1>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-lg-12">
+            <h3>Overview</h3>
+            <p>Request the geographical position of a user.</p>
+            
+            <hr />
+            
+            <h3>Demo</h3>
+            <p><a onClick="getLocation()" class="btn btn-md btn-default">Click here to activate the Geolocation request</a></p>
+			<p id="results" class="text-success"></p>   
+            
+            <hr />
+            
+            <h3>Code</h3>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#html" aria-controls="html" role="tab" data-toggle="tab">HTML</a></li>
+                <li role="presentation"><a href="#js" aria-controls="js" role="tab" data-toggle="tab">JS</a></li>
+            </ul>
+            
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="html">
+	                <p><pre class="code prettyprint">&lt;p&gt;&lt;a onclick="getLocation()" class="btn btn-md btn-default"&gt;Click here to activate the Geolocation request&lt;/a&gt;&lt;/p&gt;
+&lt;p id="results" class="text-success">&lt;/p&gt;</pre></p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js">
+                	<p><pre class="code prettyprint">var userLocation = document.getElementById("results");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else { 
+        userLocation.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    userLocation.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            userLocation.innerHTML = "&lt;span class='text-danger'&gt;User denied the request for Geolocation.&lt;/span&gt;"
+            break;
+        case error.POSITION_UNAVAILABLE:
+            userLocation.innerHTML = "&lt;span class='text-danger'&gt;Location information is unavailable.&lt;/span&gt;"
+            break;
+        case error.TIMEOUT:
+            userLocation.innerHTML = "&lt;span class='text-danger'&gt;The request to get user location timed out.&lt;/span&gt;"
+            break;
+        case error.UNKNOWN_ERROR:
+            userLocation.innerHTML = "&lt;span class='text-danger'&gt;An unknown error occurred.&lt;/span&gt;"
+            break;
+    }
+}</pre></p>
+                </div>
+            </div> 
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="../dist/js/jquery-3.1.1.js"></script>
+<script src="../dist/js/bootstrap.min.js"></script>
+<script src="../dist/js/ie10-viewport-bug-workaround.js"></script>
+<script src="../dist/js/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script>
+var userLocation = document.getElementById("results");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else { 
+        userLocation.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    userLocation.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            userLocation.innerHTML = "<span class='text-danger'>User denied the request for Geolocation.</span>"
+            break;
+        case error.POSITION_UNAVAILABLE:
+            userLocation.innerHTML = "<span class='text-danger'>Location information is unavailable.</span>"
+            break;
+        case error.TIMEOUT:
+            userLocation.innerHTML = "<span class='text-danger'>The request to get user location timed out.</span>"
+            break;
+        case error.UNKNOWN_ERROR:
+            userLocation.innerHTML = "<span class='text-danger'>An unknown error occurred.</span>"
+            break;
+    }
+}
+</script>
